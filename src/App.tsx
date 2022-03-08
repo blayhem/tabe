@@ -10,7 +10,6 @@ import {
   setupIonicReact
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, square, triangle } from 'ionicons/icons';
 import Tab1 from './pages/Tab1';
 import Tab2 from './pages/Tab2';
 import Tab3 from './pages/Tab3';
@@ -41,9 +40,7 @@ const App: React.FC = () => (
     <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet>
-          <Route exact path="/tab1">
-            <Tab1 />
-          </Route>
+          <Route exact path="/tab1" component={Tab1} />
           <Route exact path="/tab2">
             <Tab2 />
           </Route>
@@ -56,16 +53,20 @@ const App: React.FC = () => (
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
           <IonTabButton tab="tab1" href="/tab1">
-            <IonIcon icon={triangle} />
-            <IonLabel>Tab 1</IonLabel>
+            <IonIcon icon="/assets/icon/cart.svg" />
+            <IonLabel>Shopping list</IonLabel>
           </IonTabButton>
           <IonTabButton tab="tab2" href="/tab2">
-            <IonIcon icon={ellipse} />
-            <IonLabel>Tab 2</IonLabel>
+            <IonIcon icon="/assets/icon/menu.svg" />
+            <IonLabel>Menu</IonLabel>
           </IonTabButton>
           <IonTabButton tab="tab3" href="/tab3">
-            <IonIcon icon={square} />
-            <IonLabel>Tab 3</IonLabel>
+            <IonIcon icon="/assets/icon/burger.svg" />
+            <IonLabel>Recipes</IonLabel>
+          </IonTabButton>
+          <IonTabButton tab="tab4" href="/tab4">
+            <IonIcon icon="/assets/icon/mushroom.svg" />
+            <IonLabel>Ingredients</IonLabel>
           </IonTabButton>
         </IonTabBar>
       </IonTabs>
