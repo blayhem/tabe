@@ -1,4 +1,5 @@
-import { IonGrid, IonRow, IonCol, IonChip, IonItem } from "@ionic/react";
+import React, { useState } from 'react';
+import { IonGrid, IonRow, IonCol, IonChip, IonTextarea, TextareaChangeEventDetail } from "@ionic/react";
 
 interface MenuProps {
   numberOfDays: number;
@@ -28,7 +29,18 @@ function getRandomFoodPlaceholder(): string {
 }
 
 const MenuComponent: React.FC<MenuProps> = ({ numberOfDays }) => {
+  const [text, setText] = useState<string>('');
   const baseDate = new Date();
+
+  const onInputChange = (event: CustomEvent<TextareaChangeEventDetail>) => {
+    console.log(event);
+    const diffStr = new String(event.detail.value).replace(text, '');
+    if (diffStr === '\n') {
+      // add ionChip
+    } else {
+      setText(event.detail.value!);
+    }
+  };
   return (
     <IonGrid>
       <IonRow>
@@ -44,11 +56,13 @@ const MenuComponent: React.FC<MenuProps> = ({ numberOfDays }) => {
         baseDate.setDate(baseDate.getDate() + 1);
         return (
           <IonRow key={`row-${baseDate.toString()}`}>
-            <IonCol>
+            <IonCol size="2">
               <div>{getDateWithoutYear(baseDate)}</div>
             </IonCol>
             <IonCol>
-              <IonChip>{getRandomFoodPlaceholder()}</IonChip>
+              <IonTextarea placeholder="Add..." value={text} onIonChange={e => onInputChange(e)}>
+                <IonChip>{getRandomFoodPlaceholder()}</IonChip>
+              </IonTextarea>
             </IonCol>
             <IonCol>
               <IonChip>{getRandomFoodPlaceholder()}</IonChip>
